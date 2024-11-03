@@ -1,58 +1,146 @@
-# create-svelte
+# Svelte Components
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+It makes use of the following technologies
+- [`shadcn-svelte`](https://next.shadcn-svelte.com/)
+- [`svelte 5`](https://svelte.dev/)
+- [`tailwindcss`](https://tailwindcss.com/)
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
 
-## Creating a project
+## Vite Configuration
+Update your vite.config.ts file in your sveltekit application with the following
+
+```typescript
+import { defineConfig } from 'vitest/config';
+import { sveltekit } from '@sveltejs/kit/vite';
+
+export default defineConfig({
+  plugins: [sveltekit()],
+  server: {
+    fs: {
+      allow: [
+        'dist',          // Allow access to the dist folder
+        '.',             // Allow access to the project root
+        'src'            // Allow access to src if needed
+      ]
+    }
+  }
+});
+```
+
+## SpinLoader
 
 If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npx sv create
+```svelte
+<script lang="ts">
+  import SpinLoader from "@toolsntuts/SpinLoader.svelte"
+</script>
 
-# create a new project in my-app
-npx sv create my-app
+<SpinLoader />
 ```
 
-## Developing
+## SpinLoader Configuration
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- class: Tailwindcss classes to be added as class props
+- borderColor: primary or white. Default is primary
 
-```bash
-npm run dev
+```svelte
+<script lang="ts">
+  import SpinLoader from "@toolsntuts/SpinLoader.svelte"
+</script>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<SpinLoader class="size-4" borderColor="white" />
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## CloudinaryApiFileUpload
 
-## Building
+```svelte
+<script lang="ts">
+  import CloudinaryApiFileUpload from "$lib/components/widgets/CloudinaryApiFileUpload.svelte";
+	import type { iMedia } from "$lib/interface/index.js";
 
-To build your library:
+  const onUpload = (media: iMedia) => {
+    console.log({ media, action: "uploaded" })
+  }
 
-```bash
-npm run package
+  const onDelete = (media: iMedia) => {
+    console.log({ media, action: "deleted" })
+  }
+</script>
+
+<CloudinaryApiFileUpload { onUpload } { onDelete } folder="test" />
 ```
 
-To create a production version of your showcase app:
+## CloudinaryApiFileUpload Configuration
 
-```bash
-npm run build
+In your .env file add your cloudinary environment variables
+
+```typescript
+PUBLIC_CLOUDINARY_UPLOAD_PRESET=
+PUBLIC_CLOUDINARY_CLOUD_NAME=
+PUBLIC_CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_URL=
 ```
 
-You can preview the production build with `npm run preview`.
+Then create your post and delete api routes
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```typescript
+import type { iCloudinaryInfo, TUpload, iStatus, iUploadResource, iMedia } from '$lib/interface/index.js';
+import { json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types.js';
+import { deleteFileFromCloudinary, uploadToCloudinary, uploadUrlToCloudinary } from '$lib/server/index.js';
+import { UploadType } from '$lib/constants/index.js';
 
-## Publishing
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+export const POST: RequestHandler = async ({ request }) => {
+  
+  // Your authentication logic
 
-To publish your library to [npm](https://www.npmjs.com):
+  try {
+    const formData = await request.formData()
 
-```bash
-npm publish
+    const type = formData.get('type') as TUpload
+
+    let res: iCloudinaryInfo | null = null
+
+    if (type === UploadType.UPLOAD) {
+      const resource: iUploadResource = {
+        file: formData.get('file') as File,
+        folder: formData.get('folder') as string
+      }
+      res = await uploadToCloudinary(resource) as unknown as iCloudinaryInfo
+    } else { 
+      const resource: iUploadResource = {
+        url: formData.get('url') as string,
+        folder: formData.get('folder') as string
+      }
+      res = await uploadUrlToCloudinary(resource) as unknown as iCloudinaryInfo
+    }
+    
+    const result: iStatus = { message: "Successfully uploaded file", status: "success", data: res }
+    return new Response(JSON.stringify(result))
+  } catch (error: any) {
+    const result: iStatus = { message: error.message, status: "error" }
+    return new Response(JSON.stringify(result))
+  }
+};
+
+export const DELETE: RequestHandler = async ({ request }) => {
+  
+  // Your authentication logic
+
+  const body = await request.json()
+  const { public_id, type, resource_type, secure_url } = body
+  const media: iMedia = { public_id, type, resource_type, secure_url }
+  
+  try {
+    const response = await deleteFileFromCloudinary(media)
+    const result: iStatus = { message: "successfully deleted file", status: "success", data: response }
+    return json(result)
+  } catch (error: any) {
+    const result: iStatus = { message: error.message, status: "error" }
+    return json(result)
+  }
+};
 ```
