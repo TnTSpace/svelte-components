@@ -1,6 +1,6 @@
 {
 	"name": "@toolsntuts/svelte-components",
-	"version": "0.0.4",
+	"version": "0.1.3",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/TnTSpace/svelte-components.git"
@@ -57,8 +57,8 @@
 			"svelte": "./dist/components/widgets/CloudinaryApiFileUpload.svelte"
 		},
 		"./Footer.svelte": {
-			"types": "./dist/components/sections/Footer.svelte.d.ts",
-			"svelte": "./dist/components/sections/Footer.svelte"
+			"types": "./dist/components/widgets/Footer.svelte.d.ts",
+			"svelte": "./dist/components/widgets/Footer.svelte"
 		}
 	},
 	"files": [

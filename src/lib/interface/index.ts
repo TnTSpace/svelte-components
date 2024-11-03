@@ -51,3 +51,14 @@ export interface iUploadResource {
   folder: string;
   url?: string
 }
+
+export interface iItem {
+  label: string;
+  value: string;
+}
+
+export interface iLink {
+  name: string;
+  href: string;
+  icon?: any
+}

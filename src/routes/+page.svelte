@@ -1,6 +1,5 @@
-<script lang="ts">
-  import CloudinaryApiFileUpload from "$lib/components/widgets/CloudinaryApiFileUpload.svelte";
-	import type { iMedia } from "$lib/interface/index.js";
+<!-- <script lang="ts">
+  import { type iMedia, CloudinaryApiFileUpload } from "@toolsntuts/svelte-components"
 
   const onUpload = (media: iMedia) => {
     console.log({ media, action: "uploaded" })
@@ -11,4 +10,4 @@
   }
 </script>
 
-<CloudinaryApiFileUpload { onUpload } { onDelete } folder="test" />
+<CloudinaryApiFileUpload { onUpload } { onDelete } folder="test" /> -->
