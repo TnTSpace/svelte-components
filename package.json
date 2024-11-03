@@ -1,6 +1,10 @@
 {
 	"name": "@toolsntuts/svelte-components",
-	"version": "0.0.3",
+	"version": "0.0.4",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TnTSpace/svelte-components.git"
+	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
