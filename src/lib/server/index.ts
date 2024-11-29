@@ -1,5 +1,5 @@
 
-import { v2 as cloudinary, type UploadApiOptions, type UploadApiResponse } from 'cloudinary';
+import { v2 as cloudinary, type UploadApiOptions } from 'cloudinary';
 import { PUBLIC_CLOUDINARY_API_KEY, PUBLIC_CLOUDINARY_CLOUD_NAME } from '$env/static/public';
 import { CLOUDINARY_API_SECRET } from '$env/static/private';
 import type { iMedia, iUploadResource } from '../interface/index.js';

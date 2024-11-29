@@ -1,0 +1,1 @@
+tiptap slash command: https://tiptap.dev/docs/editor/getting-started/style-editor/custom-menus

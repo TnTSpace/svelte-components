@@ -140,12 +140,12 @@
 								)}
 							>
 								<CloudUploadIcon class="size-4" />
-								<span>Upload file</span>
+								<span>Upload image</span>
 							</label>
 							<button type="submit" bind:this={button} aria-label="Submit"></button>
 						</form>
 						<hr/>
-						<form
+						<!-- <form
 							onsubmit={(evt) => onSubmit(evt, UploadType.URL)}
 							class="grid grid-cols-[1fr_40px] items-center gap-1"
 						>
@@ -153,7 +153,7 @@
 							<Button size="icon" type="submit" variant="outline">
 								<ArrowRightIcon class="size-4" />
 							</Button>
-						</form>
+						</form> -->
 					</div>
 					<span class="text-muted-foreground mx-auto max-w-[300px] whitespace-pre-wrap text-sm"
 						>Image must be less than 1.5MB in size</span
