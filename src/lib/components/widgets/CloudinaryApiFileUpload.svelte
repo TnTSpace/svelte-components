@@ -68,7 +68,6 @@
 
 			showWidget = false;
 			loading = false;
-			toast.success(message);
 		} catch (error: any) {
 			toast.error(error.message);
 		} finally {

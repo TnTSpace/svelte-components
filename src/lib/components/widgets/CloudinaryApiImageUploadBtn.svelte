@@ -15,6 +15,7 @@
 		media?: iMedia;
 		folder: string;
 		class?: string;
+		subline?: string
 		cloudinaryApi?: string;
 		spinnerClass?: string;
 		onUpload: (media: iMedia) => void;
@@ -28,6 +29,7 @@
 		folder = '',
 		onUpload,
 		onDelete,
+		subline,
 		class: className,
 		spinnerClass,
 		cloudinaryApi
@@ -68,7 +70,6 @@
 
 			showWidget = false;
 			loading = false;
-			toast.success(message);
 		} catch (error: any) {
 			toast.error(error.message);
 		} finally {
@@ -156,7 +157,7 @@
 						</form> -->
 					</div>
 					<span class="text-muted-foreground mx-auto max-w-[300px] whitespace-pre-wrap text-sm"
-						>Image must be less than 1.5MB in size</span
+						>{subline ? subline : 'Image must be less than 1.5MB in size'}</span
 					>
 				</div>
 			</div>
