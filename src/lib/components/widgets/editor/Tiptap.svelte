@@ -14,16 +14,16 @@
 
 	import Menu from './Menu.svelte';
 	import Display from './Display.svelte';
-	import Preview from './Preview.svelte';
 	import { Iframe } from './custom/iframe.js';
 	import { CustomTableCell } from './custom/custom-tablecell.js';
 
 	interface Props {
 		title?: string;
+		content?: string;
 		getcontent: (content: string) => void
 	}
 
-	let { title, getcontent }: Props = $props()
+	let { title, getcontent, content }: Props = $props()
 
 	let element: Writable<Element> = writable();
 	let editor: Writable<Editor> = writable();
@@ -107,6 +107,7 @@
 	onMount(() => {
 		$editor = new Editor({
 			element: $element,
+			content: content ? content : '',
 			editorProps: {
 				attributes: {
 					class:

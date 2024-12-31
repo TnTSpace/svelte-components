@@ -1,6 +1,6 @@
 {
 	"name": "@toolsntuts/svelte-components",
-	"version": "0.3.8",
+	"version": "0.4.4",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/TnTSpace/svelte-components.git"
@@ -13,7 +13,7 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/eslint": "^9.6.0",
 		"autoprefixer": "^10.4.20",
-		"bits-ui": "^1.0.0-next.66",
+		"bits-ui": "^1.0.0-next.76",
 		"clsx": "^2.1.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -27,8 +27,8 @@
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"svelte-sonner": "^0.3.28",
-		"tailwind-merge": "^2.5.4",
-		"tailwind-variants": "^0.2.1",
+		"tailwind-merge": "^2.6.0",
+		"tailwind-variants": "^0.3.0",
 		"tailwindcss": "^3.4.9",
 		"tailwindcss-animate": "^1.0.7",
 		"typescript": "^5.0.0",
@@ -67,6 +67,38 @@
 		"./Footer.svelte": {
 			"types": "./dist/components/widgets/Footer.svelte.d.ts",
 			"svelte": "./dist/components/widgets/Footer.svelte"
+		},
+		"./DataTable.svelte": {
+			"types": "./dist/components/widgets/table/DataTable.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/DataTable.svelte"
+		},
+		"./Name.svelte": {
+			"types": "./dist/components/widgets/table/comps/Name.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/comps/Name.svelte"
+		},
+		"./Date.svelte": {
+			"types": "./dist/components/widgets/table/comps/Date.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/comps/Date.svelte"
+		},
+		"./Image.svelte": {
+			"types": "./dist/components/widgets/table/comps/Image.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/comps/Image.svelte"
+		},
+		"./Gender.svelte": {
+			"types": "./dist/components/widgets/table/comps/Gender.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/comps/Gender.svelte"
+		},
+		"./DataTableNameSorting.svelte": {
+			"types": "./dist/components/widgets/table/data-name-sorting.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/data-name-sorting.svelte"
+		},
+		"./DataTableActions.svelte": {
+			"types": "./dist/components/widgets/table/data-table-actions.svelte.d.ts",
+			"svelte": "./dist/components/widgets/table/data-table-actions.svelte"
+		},
+		"./TelInput.svelte": {
+			"types": "./dist/components/widgets/TelInput.svelte.d.ts",
+			"svelte": "./dist/components/widgets/TelInput.svelte"
 		}
 	},
 	"files": [
@@ -78,7 +110,7 @@
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
 		"preview": "vite preview",
-		"package": "svelte-kit sync && svelte-package && publint",
+		"package": "rimraf svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
 		"publish": "npm publish --access public",
 		"unpublish": "npm unpublish @toolsntuts/svelte-components -f",
@@ -96,6 +128,7 @@
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"dependencies": {
+		"@tanstack/table-core": "^8.20.5",
 		"@tiptap/core": "^2.10.2",
 		"@tiptap/extension-color": "^2.10.2",
 		"@tiptap/extension-image": "^2.10.3",
@@ -108,8 +141,10 @@
 		"@tiptap/pm": "^2.10.2",
 		"@tiptap/starter-kit": "^2.10.3",
 		"@toolsntuts/svelte-components": "^0.1.9",
-		"@toolsntuts/utils": "0.0.5",
+		"@toolsntuts/utils": "^0.1.5",
 		"cloudinary": "^2.5.1",
-		"lucide-svelte": "^0.468.0"
+		"lucide-svelte": "^0.469.0",
+		"rimraf": "^6.0.1",
+		"svelte-tel-input": "^3.5.2"
 	}
 }
