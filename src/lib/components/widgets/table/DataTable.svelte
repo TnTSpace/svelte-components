@@ -17,14 +17,17 @@
 	import { removeRingClasses } from '@toolsntuts/utils'
 	// @ts-ignore
 	import { PlusIcon } from "lucide-svelte"
+	import { cn } from '../../../utils.js';
 
 	type DataTableProps<TData, TValue> = {
 		columns: ColumnDef<TData, TValue>[];
 		data: TData[];
 		filterKeys: string[];
+		onAdd: () => void;
+		class?: string;
 	};
 
-	let { data, columns, filterKeys }: DataTableProps<TData, TValue> = $props();
+	let { data, columns, filterKeys, onAdd, class: className }: DataTableProps<TData, TValue> = $props();
 	let dataStore: Writable<TData[]> = writable(data);
 	let searchTerm = $state('');
 
@@ -112,11 +115,11 @@
 
 <div class="grid grid-cols-[1fr_40px] gap-4 py-4 max-w-md">
 	<Input placeholder="Filter..." bind:value={searchTerm} {onkeyup} class={removeRingClasses()} />
-	<Button variant="outline" size="icon">
+	<Button variant="outline" size="icon" onclick={onAdd}>
 		<PlusIcon class="size-4" />
 	</Button>
 </div>
-<div class="rounded-md border">
+<div class={cn("rounded-md border w-full overflow-x-auto", className)}>
 	<Table.Root>
 		<Table.Header>
 			{#each table.getHeaderGroups() as headerGroup (headerGroup.id)}

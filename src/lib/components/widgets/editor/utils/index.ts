@@ -7,7 +7,21 @@ import H5 from "../icons/H5.svelte";
 import H6 from "../icons/H6.svelte";
 import type { iGroup, iMenu } from "./types.js";
 import { onAddColumnAfter, onAddColumnBefore, onAddRowAfter, onAddRowBefore, onBlockquote, onBulletList, onCodeblock, onDeleteColumn, onDeleteRow, onDeleteTable, onHeadingClick, onIframe, onImage, onInsertTable, onLink, onMergeCells, onMergeOrSplit, onOrderedList, onParagraph, onSplitCell, onTextAlign } from "./functions.js";
-import { ImageIcon, ListIcon, AlignCenterVerticalIcon, AlignLeftIcon, AlignRightIcon, AlignCenterIcon, AlignJustifyIcon, CodeIcon, TableIcon, Grid2x2PlusIcon, TrashIcon, CombineIcon, YoutubeIcon, Link2Icon } from "lucide-svelte";
+
+import ListIcon from 'lucide-svelte/icons/list'
+import AlignCenterVerticalIcon from 'lucide-svelte/icons/align-center-vertical'
+import AlignRightIcon from 'lucide-svelte/icons/align-right'
+import AlignLeftIcon from 'lucide-svelte/icons/align-left'
+import AlignCenterIcon from 'lucide-svelte/icons/align-center'
+import AlignJustifyIcon from 'lucide-svelte/icons/align-justify'
+import CodeIcon from 'lucide-svelte/icons/code'
+import TableIcon from 'lucide-svelte/icons/table'
+import Grid2x2PlusIcon from 'lucide-svelte/icons/grid-2x2-plus'
+import ImageIcon from 'lucide-svelte/icons/image'
+import TrashIcon from 'lucide-svelte/icons/trash'
+import CombineIcon from 'lucide-svelte/icons/combine'
+import YoutubeIcon from 'lucide-svelte/icons/youtube'
+import Link2Icon from 'lucide-svelte/icons/link-2'
 import NumberedList from "../icons/NumberedList.svelte";
 import Text from "../icons/Text.svelte";
 import H from "../icons/H.svelte";

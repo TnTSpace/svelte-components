@@ -1,6 +1,6 @@
 {
 	"name": "@toolsntuts/svelte-components",
-	"version": "0.4.4",
+	"version": "0.6.8",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/TnTSpace/svelte-components.git"
@@ -13,7 +13,7 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/eslint": "^9.6.0",
 		"autoprefixer": "^10.4.20",
-		"bits-ui": "^1.0.0-next.76",
+		"bits-ui": "^1.0.0-next.84",
 		"clsx": "^2.1.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -99,6 +99,18 @@
 		"./TelInput.svelte": {
 			"types": "./dist/components/widgets/TelInput.svelte.d.ts",
 			"svelte": "./dist/components/widgets/TelInput.svelte"
+		},
+		"./AlertWidget.svelte": {
+			"types": "./dist/components/widgets/AlertWidget.svelte.d.ts",
+			"svelte": "./dist/components/widgets/AlertWidget.svelte"
+		},
+		"./UploadWidget.svelte": {
+			"types": "./dist/components/widgets/upload/UploadWidget.svelte.d.ts",
+			"svelte": "./dist/components/widgets/upload/UploadWidget.svelte"
+		},
+		"./Educational.svelte": {
+			"types": "./dist/components/widgets/Educational.svelte.d.ts",
+			"svelte": "./dist/components/widgets/Educational.svelte"
 		}
 	},
 	"files": [
@@ -110,7 +122,7 @@
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
 		"preview": "vite preview",
-		"package": "rimraf svelte-kit sync && svelte-package && publint",
+		"package": "rimraf .svelte-kit && svelte-package && publint",
 		"prepublishOnly": "npm run package",
 		"publish": "npm publish --access public",
 		"unpublish": "npm unpublish @toolsntuts/svelte-components -f",
@@ -119,7 +131,8 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run"
+		"test": "npm run test:unit -- --run",
+		"clear-cache": "bunx vite --force"
 	},
 	"sideEffects": [
 		"**/*.css"
@@ -138,12 +151,19 @@
 		"@tiptap/extension-table-header": "^2.10.3",
 		"@tiptap/extension-table-row": "^2.10.3",
 		"@tiptap/extension-text-align": "^2.10.3",
+		"@tiptap/extension-underline": "^2.11.5",
 		"@tiptap/pm": "^2.10.2",
 		"@tiptap/starter-kit": "^2.10.3",
 		"@toolsntuts/svelte-components": "^0.1.9",
 		"@toolsntuts/utils": "^0.1.5",
+		"@uppy/core": "^4.4.1",
+		"@uppy/dashboard": "^4.3.1",
+		"@uppy/image-editor": "^3.3.1",
+		"@uppy/remote-sources": "^2.3.1",
+		"@uppy/xhr-upload": "^4.3.2",
 		"cloudinary": "^2.5.1",
-		"lucide-svelte": "^0.469.0",
+		"imagekit": "^6.0.0",
+		"lucide-svelte": "^0.474.0",
 		"rimraf": "^6.0.1",
 		"svelte-tel-input": "^3.5.2"
 	}

@@ -2,7 +2,7 @@ import { renderComponent } from "$lib/components/ui/data-table/index.js";
 
 import type { ColumnDef } from "@tanstack/table-core";
 import { getAge } from "@toolsntuts/utils";
-import { Name } from "@toolsntuts/svelte-components"
+import Name from "./comps/Name.svelte";
 import DataTableActions from "../table/data-table-actions.svelte";
 import DataNameSorting from "../table/data-name-sorting.svelte";
 import type { iChild } from "$lib/interface/index.js";

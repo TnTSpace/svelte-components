@@ -9,6 +9,7 @@
 	import StarterKit from '@tiptap/starter-kit';
 	import Table from '@tiptap/extension-table';
 	import TableHeader from '@tiptap/extension-table-header';
+	import Underline from '@tiptap/extension-underline'
 	import TableRow from '@tiptap/extension-table-row';
 	import Link from '@tiptap/extension-link';
 
@@ -101,7 +102,8 @@
 		Iframe,
 		TextAlign.configure({
 			types: ['heading', 'paragraph']
-		})
+		}),
+		Underline
 	];
 
 	onMount(() => {
@@ -111,7 +113,7 @@
 			editorProps: {
 				attributes: {
 					class:
-						'prose dark:prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none py-1 px-2 max-h-[240px] overflow-y-auto !text-base'
+						'mx-auto focus:outline-none py-1 px-2 h-full max-h-[240px] overflow-y-auto !text-base'
 				}
 			},
 			extensions,
@@ -134,5 +136,4 @@
 <div class="flex flex-col overflow-hidden rounded-lg border">
 	<Menu {editor} {title} />
 	<Display {element} />
-	<!-- <Preview {content} /> -->
 </div>

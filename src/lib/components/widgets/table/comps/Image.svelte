@@ -1,20 +1,18 @@
 <script lang="ts">
-	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
-	import { onMount } from 'svelte';
+	import { AvatarImage, Avatar, AvatarFallback } from "$lib/components/ui/avatar/index.js"
+	import { cn } from "$lib/utils.js";
 
 	interface Props {
 		src: string;
+		initials?: string;
+		class?: string
 	}
 
-	let { src = '' }: Props = $props();
-
-	let mounted = new Promise((resolve) => {
-		onMount(() => resolve(true));
-	});
+	let { src = '', initials, class: className }: Props = $props();
 </script>
 
-{#await mounted}
-	<Skeleton class="aspect-square w-12 max-w-12 rounded-lg" />
-{:then value}
-	<img {src} alt="preview" class="aspect-square w-12 max-w-12 rounded-lg" />
-{/await}
+
+<Avatar class={cn("size-12", className)}>
+	<AvatarImage {src} />
+	<AvatarFallback>{initials}</AvatarFallback>
+</Avatar>

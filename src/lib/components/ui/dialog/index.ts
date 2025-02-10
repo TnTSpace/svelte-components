@@ -7,10 +7,10 @@ import Overlay from "./dialog-overlay.svelte";
 import Content from "./dialog-content.svelte";
 import Description from "./dialog-description.svelte";
 
-const Root = DialogPrimitive.Root;
-const Trigger = DialogPrimitive.Trigger;
-const Close = DialogPrimitive.Close;
-const Portal = DialogPrimitive.Portal;
+const Root = DialogPrimitive.Root as typeof DialogPrimitive.Root;
+const Trigger = DialogPrimitive.Trigger as typeof DialogPrimitive.Trigger;
+const Close = DialogPrimitive.Close as typeof DialogPrimitive.Close;
+const Portal = DialogPrimitive.Portal as typeof DialogPrimitive.Portal;
 
 export {
 	Root,

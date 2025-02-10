@@ -12,7 +12,10 @@ export { default as DataTableNameSorting } from './components/widgets/table/data
 export { default as DataTableActions } from './components/widgets/table/data-table-actions.svelte'
 export { default as Footer } from "./components/widgets/Footer.svelte"
 export { default as TelInput } from "./components/widgets/TelInput.svelte"
+export { default as AlertWidget } from "./components/widgets/AlertWidget.svelte"
+export { default as UploadWidget } from "./components/widgets/upload/UploadWidget.svelte"
+export { default as Educational } from "./components/widgets/Educational.svelte"
 export { UploadType } from "./constants/index.js"
 // import { renderComponent } from "$lib/components/ui/data-table/index.js";
 export { renderComponent } from './components/ui/data-table/index.js'
-export type { TStatus, TUpload, iCloudinaryInfo, iMedia, iStatus, iUploadResource, iItem } from "./interface/index.js"
+export type { TStatus, TUpload, iCloudinaryInfo, iMedia, iStatus, iUploadResource, iItem, iPhone, iParent, iSection } from "./interface/index.js"

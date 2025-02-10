@@ -2,8 +2,9 @@
 	import { Button, buttonVariants } from '../ui/button/index.js';
 	import { Input } from '../ui/input/index.js';
 	import type { iCloudinaryInfo, iMedia, iStatus, TUpload } from '../../interface/index.js';
-	import { CloudUploadIcon, TrashIcon, ArrowRightIcon } from 'lucide-svelte';
-	import { SpinLoader } from '@toolsntuts/svelte-components';
+	// @ts-ignore
+	import { CloudUploadIcon, TrashIcon, ArrowRightIcon } from 'lucide-svelte/icons';
+	import SpinLoader from './SpinLoader.svelte';
 	import { toast } from 'svelte-sonner';
 
 	import MediaPreview from './MediaPreview.svelte';

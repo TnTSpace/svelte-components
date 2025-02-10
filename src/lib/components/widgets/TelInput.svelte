@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { iPhone } from './../../interface/index.ts';
 	import type { CountryCode, E164Number } from 'svelte-tel-input/types';
 	import type { ChangeEventHandler } from 'svelte/elements';
 
@@ -7,13 +8,25 @@
 	import { normalizedCountries, TelInput } from 'svelte-tel-input';
 	import 'svelte-tel-input/styles/flags.css';
 
-	let selectedCountry = $state<CountryCode | null>(null);
-	let value = $state<E164Number | null>(null);
+
+	interface Props {
+		getvalue: (json: iPhone) => void;
+		defaultCountry?: CountryCode;
+	}
+
+	let { getvalue, defaultCountry = 'NG' }: Props = $props();
+
+	let selectedCountry = $state<CountryCode | null | string>(defaultCountry);
+
+	let value = $state<E164Number | string | null>('')
+
+	$effect(() => getvalue({ value: value as string, selectedCountry: selectedCountry as string }))
 
 	const handleCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
 		const { value } = e.currentTarget;
 		selectedCountry = (value as CountryCode) || null;
 	};
+
 </script>
 
 <div class="space-y-2" dir="ltr">
@@ -50,12 +63,10 @@
 			</select>
 		</div>
 		<TelInput
-			id="input-46"
-			required
 			placeholder="Enter phone number"
 			class="-ml-px flex h-9 w-full rounded-lg rounded-l-none border border-input bg-background px-3 py-2 text-sm text-foreground shadow-none shadow-black/[.04] ring-offset-background transition-shadow placeholder:text-muted-foreground/70 focus-visible:z-10 focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			bind:country={selectedCountry}
-			bind:value
+			bind:value={value}
 			options={{
 				format: 'international'
 			}}

@@ -224,3 +224,17 @@ export interface iMenu {
   href?: string;
   visible?: string[]
 }
+
+export interface iPhone { value: string; selectedCountry: string }
+
+export interface iUpload {
+  fileId: string;
+  id: string;
+  url: string;
+}
+
+export interface iSection {
+  id: string;
+  title: string;
+  content: string;
+}

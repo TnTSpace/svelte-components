@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
-	import { CloudinaryApiFileUpload } from '@toolsntuts/svelte-components';
+	import CloudinaryApiFileUpload from '../CloudinaryApiFileUpload.svelte';
 	import type { Snippet } from 'svelte';
 
 	interface Props {

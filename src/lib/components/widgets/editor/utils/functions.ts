@@ -81,7 +81,7 @@ export const onStrikeThrough = (editor: Editor) => {
 
 export const onUnderline = (editor: Editor) => {
   if (editor) {
-    // editor.chain().focus()
+    editor.chain().focus().toggleUnderline().run()
   }
 };
 
