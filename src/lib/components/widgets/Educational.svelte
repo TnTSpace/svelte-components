@@ -1,11 +1,12 @@
 <script lang="ts">
-	import MenuIcon from 'lucide-svelte/icons/menu';
-	import XIcon from 'lucide-svelte/icons/x';
-	import { onMount } from 'svelte';
-	import { page } from '$app/state';
-	import type { iRoute } from '$lib/interface/index.js';
-	import { cn } from '$lib/utils.js';
-	import { Button } from '../ui/button/index.js';
+	import { onMount } from "svelte";
+	import type { iRoute } from "../../interface/index.js";
+	import { Button } from "../ui/button/index.js";
+	import { cn } from "../../utils.js";
+	import XIcon from "lucide-svelte/icons/x"
+	import MenuIcon from "lucide-svelte/icons/menu"
+	import ChevronDownIcon from "lucide-svelte/icons/chevron-down"
+	import ChevronRightIcon from "lucide-svelte/icons/chevron-right"
 
 	interface Section {
 		id: string;
@@ -15,30 +16,26 @@
 
 	interface Props {
 		title: string;
-		groupTitle?: string;
 		sections: Section[];
+		groupTitle?: string;
 		lastUpdated: string;
 		pages: iRoute[];
-		top?: string;
+		url: URL;
 		offset?: number;
+		top?: string;
 	}
 
-	let {
-		title,
-		sections,
-		lastUpdated,
-		pages,
-		top,
-		groupTitle = 'Help Center',
-		offset = 64
-	}: Props = $props();
-	let location = $state(page.url);
+	let { title, sections, lastUpdated, pages, url, offset=104, top="top-[105.6px]", groupTitle="Table of Content" }: Props = $props();
+	let location = url;
 
-	let activeSection = $state('');
+	let activeSection = $state("");
 	let isMobileNavOpen = $state(false);
+	let isSectionNavOpen = $state(false);
 
 	const handleScroll = () => {
-		const sectionElements = sections.map((section) => document.getElementById(section.id));
+		const sectionElements = sections.map((section) =>
+			document.getElementById(section.id),
+		);
 
 		const currentSection = sectionElements.find((element) => {
 			if (!element) return false;
@@ -55,40 +52,58 @@
 		const element = document.getElementById(sectionId);
 
 		if (element) {
-			const offsetFromTop = offset; // Adjust this value to control the offset from the top
-			const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-			window.scrollTo({ top: elementPosition - offsetFromTop, behavior: 'smooth' });
+			const elementPosition =
+				element.getBoundingClientRect().top + window.scrollY;
+			window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
 
-			isMobileNavOpen = false;
+			isSectionNavOpen = false;
 		}
+	};
+
+	const handleSectionNav = () => {
+		isSectionNavOpen = !isSectionNavOpen;
+		isMobileNavOpen = false;
+	};
+
+	const handleMobileNav = () => {
+		isMobileNavOpen = !isMobileNavOpen;
+		isSectionNavOpen = false;
 	};
 
 	onMount(() => {
 		handleScroll();
-		window.addEventListener('scroll', handleScroll);
+		window.addEventListener("scroll", handleScroll);
 
-		return () => window.removeEventListener('scroll', handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
 	});
 </script>
 
 <div class="min-h-screen bg-background">
-	<button
-		onclick={() => (isMobileNavOpen = !isMobileNavOpen)}
-		class="fixed right-2 top-1/2 z-50 -translate-y-1/2 rounded-md border bg-background p-2 md:hidden"
+	<div
+		class={cn("flex md:hidden justify-between border-y sticky top-16 left-0 z-[1] bg-background", top)}
 	>
-		{#if isMobileNavOpen}
-			<XIcon size={24} />
-		{:else}
-			<MenuIcon size={24} />
-		{/if}
-	</button>
+		<Button variant="ghost" onclick={handleMobileNav}>
+			{#if isMobileNavOpen}
+				<XIcon size={24} />
+			{:else}
+				<MenuIcon size={24} />
+			{/if}
+		</Button>
+		<Button variant="ghost" class="items-end gap-1" onclick={handleSectionNav}>
+			On this page
+			{#if isSectionNavOpen}
+				<ChevronDownIcon size={24} />
+			{:else}
+				<ChevronRightIcon size={24} />
+			{/if}
+		</Button>
+	</div>
 
 	<nav
 		class={cn(
-			'fixed left-0 top-0 z-40 h-full w-64 transform border-r bg-background p-6 transition-transform duration-200 ease-in-out',
-			'md:transform-none',
-			isMobileNavOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
-			top
+			"fixed left-0 z-40 h-full w-64 transform border-r bg-background p-6 transition-transform duration-200 ease-in-out",
+			"md:transform-none",
+			isMobileNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
 		)}
 	>
 		<div class="space-y-6">
@@ -100,8 +115,8 @@
 							{href}
 							variant="ghost"
 							class={cn(
-								'block rounded-md p-2 hover:bg-accent',
-								location.pathname === href && 'bg-accent'
+								"block rounded-md p-2 hover:bg-accent",
+								location.pathname === href && "bg-accent",
 							)}
 						>
 							{name}
@@ -129,10 +144,9 @@
 
 	<nav
 		class={cn(
-			'fixed right-0 top-0 h-full w-64 transform border-l bg-background p-6 transition-transform duration-200 ease-in-out',
-			'md:transform-none',
-			isMobileNavOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0',
-			top
+			"fixed right-0 top-[105.6px] h-full w-64 transform border-l bg-background p-6 transition-transform duration-200 ease-in-out",
+			"md:transform-none",
+			isSectionNavOpen ? "translate-x-0" : "translate-x-full md:translate-x-0",
 		)}
 	>
 		<div class="sticky top-6">
@@ -143,8 +157,10 @@
 						<button
 							onclick={() => scrollToSection(section.id)}
 							class={cn(
-								'block w-full py-1 text-left text-sm transition-colors duration-200 hover:text-primary',
-								activeSection === section.id ? 'font-medium text-primary' : 'text-muted-foreground'
+								"block w-full py-1 text-left text-sm transition-colors duration-200 hover:text-primary",
+								activeSection === section.id
+									? "font-medium text-primary"
+									: "text-muted-foreground",
 							)}
 						>
 							{section.title}

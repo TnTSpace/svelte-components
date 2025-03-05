@@ -45,6 +45,8 @@
 
 		console.log({ uploads })
 	};
+
+	const onAdd = () => {}
 </script>
 
 <UploadWidget height="120px" id="upload" name="upload" {uploads} {oncomplete} endpoint="/api/upload" />
@@ -54,6 +56,6 @@
 
 <div class="p-4">
 	<input type="text" bind:value />
-	<!-- <DataTable columns={childrenColumns} data={children} {filterKeys} /> -->
-	<TelInput {getvalue} />
+	<DataTable {onAdd} columns={childrenColumns} data={children} {filterKeys} />
+	<!-- <TelInput {getvalue} /> -->
 </div>
